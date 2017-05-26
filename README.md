@@ -56,6 +56,11 @@ You do not need any preinstalled libraries.
 - [x] Creating a new Player object
 - [x] Creating several new Enemies objects and placing them in an array called allEnemies
 
+##### Step 4
+- [x] Add score of user
+- [x] Add level of user based on score
+- [x] Make game harder as user progresses
+
 ## Authors
 
 * **Ziad Alame** - *Customization and final points* - [ZiadAlame](https://github.com/ziadalame)
