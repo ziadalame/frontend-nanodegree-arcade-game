@@ -1,40 +1,162 @@
+// Ass defined row heigth and coloumn width in the engine file
+var block = {
+    width: 101,
+    height: 83
+};
+var offset = 20;
+var level = 1, score = 0;
+var speedLevelParameter = 100;
+var haultInput = false;
+var enemy;
+
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function () {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
+    // Get starting coordinates for enemy
+    this.x = 0;
+    this.y = (Math.floor(Math.random() * 3) + 1) * block.height - offset;
+
+    // Set enemy speed 
+    this.speed = Math.floor(Math.random() * speedLevelParameter * (1 + level * 0.2)) + 100;
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    // setting enemy movement
+    this.x += this.speed * dt;
+
+    // Check if enemy has reached end of line
+    if (this.x > ctx.canvas.width) {
+        // Add enemy on the left again
+        this.x = 0;
+        this.y = (Math.floor(Math.random() * 3) + 1) * block.height - offset;
+        // Update speed to match level
+        this.speed = Math.floor(Math.random() * speedLevelParameter * (1 + level * 0.2)) + 100;
+    }
+
+    var collision = Math.abs(player.x - this.x);
+    if (collision <= block.width / 2 && this.y === player.y) {
+        //resets player location when running into enemy
+        player.reset();
+    }
+
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function () {
+    this.sprite = 'images/char-boy.png';
+    // Set the initial loaction of the user
+    this.x = block.width * 2;
+    this.y = block.height * 5 - offset;
+}
 
+Player.prototype.update = function (dt) {
+
+}
+
+Player.prototype.render = function () {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+Player.prototype.handleInput = function (input) {
+    // check which input is being passed.
+    if (!haultInput) {
+        switch (input) {
+            case 'left':
+                if ((this.x - block.width) >= 0) {
+                    this.x -= block.width;
+                }
+                break;
+            case 'up':
+                if ((this.y - block.height) >= -1 * offset) {
+                    this.y -= block.height;
+                }
+                if (this.y < 0) {
+                    // stop handling input to avoid score increase from multiple clicks
+                    haultInput = true;
+                    setTimeout(function () {
+                        player.recordSuccess();
+                        // resume input processing
+                        haultInput = false;
+                    }, 1000);
+                }
+                break;
+            case 'right':
+                if ((this.x + block.width) <= (block.width * 4)) {
+                    this.x += block.width;
+                }
+                break;
+            case 'down':
+                if ((this.y + block.height) <= block.height * 5.5) {
+                    this.y += block.height;
+                }
+                break;
+        }
+    }
+}
+
+Player.prototype.reset = function () {
+    this.x = block.width * 2;
+    this.y = block.height * 5 - offset;
+}
+
+Player.prototype.recordSuccess = function () {
+    // Increase Score
+    document.getElementById('scoreValue').innerHTML = ++score;
+    // Update Level every 5 times user score
+    if (score % 5 == 0 && score > 0) {
+        document.getElementById('levelValue').innerHTML = ++level;
+        // Increase enemy speed
+        speedLevelParameter += 50;
+    }
+    // Add new enemy every 10 times user scores
+    if (score % 10 == 0) {
+        // Add new enemy
+        enemy = new Enemy();
+        allEnemies.push(enemy);
+    }
+    // Take player back to initial position to start again
+    player.reset();
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+// Create a player
+var player = new Player();
+// Create array of enemise
+var allEnemies = [];
+// Populate array with enemise
+var createEnemies = function (numberOfEnemies) {
+    for (var l = 0; l < numberOfEnemies; l++) {
+        enemy = new Enemy();
+        allEnemies.push(enemy);
+    }
+}(3);
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keyup', function (e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
