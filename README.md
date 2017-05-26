@@ -18,10 +18,10 @@ You do not need any preinstalled libraries.
 ## TODO
 
 ##### Step 1
-[ ] The Enemy function, which initiates the Enemy by:
-    [ ] Loading the image by setting this.sprite to the appropriate image in the image folder (already provided)
-    [ ] Setting the Enemy initial location (you need to implement)
-    [ ] Setting the Enemy speed (you need to implement)
+- [ ] The Enemy function, which initiates the Enemy by:
+    -- [ ] Loading the image by setting this.sprite to the appropriate image in the image folder (already provided)
+    -- [ ] Setting the Enemy initial location (you need to implement)
+    -- [ ] Setting the Enemy speed (you need to implement)
 [ ] The update method for the Enemy
     [ ] Updates the Enemy location (you need to implement)
     [ ] Handles collision with the Player (you need to implement)
