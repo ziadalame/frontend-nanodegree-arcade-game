@@ -12,7 +12,8 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 ## Game looks
 
-TODO: Add screenshot
+![Game Screenshot](https://github.com/ziadalame/frontend-nanodegree-arcade-game/blob/master/images/game-screeshot.png?raw=true)
+
 
 ## Getting Started
 
