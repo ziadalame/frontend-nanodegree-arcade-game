@@ -3,10 +3,16 @@ var block = {
     width: 101,
     height: 83
 };
+
+// Offset to keep objects in the center of the block
 var offset = 20;
+// Initial score and lebel of user
 var level = 1, score = 0;
+// Initial speed of enemy
 var speedLevelParameter = 100;
+// Used to manage response to user input
 var haultInput = false;
+// An variable to hold an enemy object
 var enemy;
 
 // Enemies our player must avoid
@@ -68,9 +74,7 @@ var Player = function () {
     this.y = block.height * 5 - offset;
 }
 
-Player.prototype.update = function (dt) {
-
-}
+Player.prototype.update = function (dt) { }
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -113,11 +117,13 @@ Player.prototype.handleInput = function (input) {
     }
 }
 
+// Reset player to initial position
 Player.prototype.reset = function () {
     this.x = block.width * 2;
     this.y = block.height * 5 - offset;
 }
 
+// Update score, level and gaming effects like speed and number of enemies
 Player.prototype.recordSuccess = function () {
     // Increase Score
     document.getElementById('scoreValue').innerHTML = ++score;
