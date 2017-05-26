@@ -4,10 +4,15 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 ## Game tactics
 
+- Players can move via the arrow keys only
 - Players should reach the water to be able to score 1 point
 - Players advance to the next level every 5 score points
 - Enemy speed increases every level
 - Enemies increase every 2 levels or 10 score points
+
+## Game looks
+
+TODO: Add screenshot
 
 ## Getting Started
 
@@ -49,10 +54,6 @@ You do not need any preinstalled libraries.
 ##### Step 3
 - [x] Creating a new Player object
 - [x] Creating several new Enemies objects and placing them in an array called allEnemies
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
