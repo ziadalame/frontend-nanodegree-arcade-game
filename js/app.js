@@ -96,11 +96,12 @@ Player.prototype.handleInput = function (input) {
                 if (this.y < 0) {
                     // stop handling input to avoid score increase from multiple clicks
                     haultInput = true;
+                    // Wait some time to show the user that he reached to the water before reset
                     setTimeout(function () {
                         player.recordSuccess();
                         // resume input processing
                         haultInput = false;
-                    }, 1000);
+                    }, 750);
                 }
                 break;
             case 'right':
