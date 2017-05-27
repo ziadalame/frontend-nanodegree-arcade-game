@@ -62,6 +62,9 @@ You do not need any preinstalled libraries.
 - [x] Add level of user based on score
 - [x] Make game harder as user progresses
 
+##### Step 5
+- [x] Publish game
+
 ## Authors
 
 * **Ziad Alame** - *Customization and final points* - [ZiadAlame](https://github.com/ziadalame)
