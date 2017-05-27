@@ -1,4 +1,4 @@
-'use strict;'
+'use strict';
 
 // As defined row heigth and coloumn width in the engine file
 var BLOCK = {
