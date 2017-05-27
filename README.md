@@ -4,6 +4,7 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 ## Game tactics
 
+- To start playing, headover to: [Arcade Game](https://ziadalame.github.io/frontend-nanodegree-arcade-game/)
 - Players can move via the arrow keys only
 - Players should reach the water to be able to score 1 point
 - Players advance to the next level every 5 score points
