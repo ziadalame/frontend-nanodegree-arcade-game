@@ -7,7 +7,7 @@ var BLOCK = {
 };
 
 // Offset to keep objects in the center of the block
-var offset = 20;
+var offset = 10;
 // Initial score and lebel of user
 var level = 1, score = 0;
 // Initial speed of enemy
