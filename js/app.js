@@ -1,5 +1,7 @@
-// Ass defined row heigth and coloumn width in the engine file
-var block = {
+'use strict;'
+
+// As defined row heigth and coloumn width in the engine file
+var BLOCK = {
     width: 101,
     height: 83
 };
@@ -26,7 +28,7 @@ var Enemy = function () {
 
     // Get starting coordinates for enemy
     this.x = 0;
-    this.y = (Math.floor(Math.random() * 3) + 1) * block.height - offset;
+    this.y = (Math.floor(Math.random() * 3) + 1) * BLOCK.height - offset;
 
     // Set enemy speed 
     this.speed = Math.floor(Math.random() * speedLevelParameter * (1 + level * 0.2)) + 100;
@@ -46,13 +48,13 @@ Enemy.prototype.update = function (dt) {
     if (this.x > ctx.canvas.width) {
         // Add enemy on the left again
         this.x = 0;
-        this.y = (Math.floor(Math.random() * 3) + 1) * block.height - offset;
+        this.y = (Math.floor(Math.random() * 3) + 1) * BLOCK.height - offset;
         // Update speed to match level
         this.speed = Math.floor(Math.random() * speedLevelParameter * (1 + level * 0.2)) + 100;
     }
 
     var collision = Math.abs(player.x - this.x);
-    if (collision <= block.width / 2 && this.y === player.y) {
+    if (collision <= BLOCK.width / 2 && this.y === player.y) {
         //resets player location when running into enemy
         player.reset();
     }
@@ -70,8 +72,8 @@ Enemy.prototype.render = function () {
 var Player = function () {
     this.sprite = 'images/char-boy.png';
     // Set the initial loaction of the user
-    this.x = block.width * 2;
-    this.y = block.height * 5 - offset;
+    this.x = BLOCK.width * 2;
+    this.y = BLOCK.height * 5 - offset;
 };
 
 Player.prototype.update = function (dt) { };
@@ -85,13 +87,13 @@ Player.prototype.handleInput = function (input) {
     if (!haultInput) {
         switch (input) {
             case 'left':
-                if ((this.x - block.width) >= 0) {
-                    this.x -= block.width;
+                if ((this.x - BLOCK.width) >= 0) {
+                    this.x -= BLOCK.width;
                 }
                 break;
             case 'up':
-                if ((this.y - block.height) >= -1 * offset) {
-                    this.y -= block.height;
+                if ((this.y - BLOCK.height) >= -1 * offset) {
+                    this.y -= BLOCK.height;
                 }
                 if (this.y < 0) {
                     // stop handling input to avoid score increase from multiple clicks
@@ -105,13 +107,13 @@ Player.prototype.handleInput = function (input) {
                 }
                 break;
             case 'right':
-                if ((this.x + block.width) <= (block.width * 4)) {
-                    this.x += block.width;
+                if ((this.x + BLOCK.width) <= (BLOCK.width * 4)) {
+                    this.x += BLOCK.width;
                 }
                 break;
             case 'down':
-                if ((this.y + block.height) <= block.height * 5.5) {
-                    this.y += block.height;
+                if ((this.y + BLOCK.height) <= BLOCK.height * 5.5) {
+                    this.y += BLOCK.height;
                 }
                 break;
         }
@@ -120,8 +122,8 @@ Player.prototype.handleInput = function (input) {
 
 // Reset player to initial position
 Player.prototype.reset = function () {
-    this.x = block.width * 2;
-    this.y = block.height * 5 - offset;
+    this.x = BLOCK.width * 2;
+    this.y = BLOCK.height * 5 - offset;
 };
 
 // Update score, level and gaming effects like speed and number of enemies
@@ -141,7 +143,7 @@ Player.prototype.recordSuccess = function () {
         allEnemies.push(enemy);
     }
     // Take player back to initial position to start again
-    player.reset();
+    this.reset();
 };
 
 // Now instantiate your objects.
