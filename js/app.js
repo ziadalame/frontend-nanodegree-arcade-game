@@ -72,13 +72,13 @@ var Player = function () {
     // Set the initial loaction of the user
     this.x = block.width * 2;
     this.y = block.height * 5 - offset;
-}
+};
 
-Player.prototype.update = function (dt) { }
+Player.prototype.update = function (dt) { };
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.handleInput = function (input) {
     // check which input is being passed.
@@ -116,33 +116,33 @@ Player.prototype.handleInput = function (input) {
                 break;
         }
     }
-}
+};
 
 // Reset player to initial position
 Player.prototype.reset = function () {
     this.x = block.width * 2;
     this.y = block.height * 5 - offset;
-}
+};
 
 // Update score, level and gaming effects like speed and number of enemies
 Player.prototype.recordSuccess = function () {
     // Increase Score
     document.getElementById('scoreValue').innerHTML = ++score;
     // Update Level every 5 times user score
-    if (score % 5 == 0 && score > 0) {
+    if (score % 5 === 0 && score > 0) {
         document.getElementById('levelValue').innerHTML = ++level;
         // Increase enemy speed
         speedLevelParameter += 50;
     }
     // Add new enemy every 10 times user scores
-    if (score % 10 == 0) {
+    if (score % 10 === 0) {
         // Add new enemy
         enemy = new Enemy();
         allEnemies.push(enemy);
     }
     // Take player back to initial position to start again
     player.reset();
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
